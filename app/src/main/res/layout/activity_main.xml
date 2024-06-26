@@ -1,0 +1,53 @@
+<!-- res/layout/activity_main.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <View
+        android:id="@+id/square"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/holo_blue_light"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="30dp" />
+
+    <View
+        android:id="@+id/arrow"
+        android:layout_width="5dp"
+        android:layout_height="100dp"
+        android:background="@android:color/holo_red_dark"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:max="100"
+        android:progress="0" />
+
+    <Button
+        android:id="@+id/my_button"
+        style="@style/MyButtonStyle"
+        android:layout_marginTop="380dp" />
+
+    <Button
+        android:id="@+id/my_button2"
+        style="@style/MyButtonStyle"
+        android:layout_below="@id/my_button" />
+
+    <Button
+        android:id="@+id/my_button3"
+        style="@style/MyButtonStyle"
+        android:layout_below="@id/my_button2" />
+
+</RelativeLayout>
