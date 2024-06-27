@@ -7,12 +7,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private Button myButton2;
     private Button myButton3;
     private ButtonConstruct buttonConstruct;
+
+    private TextView timeTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +84,11 @@ public class MainActivity extends AppCompatActivity {
         buttonConstruct.configureButton(myButton, buttonModel1);
         buttonConstruct.configureButton(myButton2, buttonModel2);
         buttonConstruct.configureButton(myButton3, buttonModel3);
+
+
+        timeTextView = findViewById(R.id.timeTextView);
+
+        new Thread(new TimeClient()).start();
     }
 
     private void startSquareAnimation(long duration) {
@@ -109,5 +122,23 @@ public class MainActivity extends AppCompatActivity {
             arrow.setRotation(angle);
         });
         animator.start();
+    }
+
+    class TimeClient implements Runnable {
+        @Override
+        public void run() {
+            try (Socket socket = new Socket("172.20.10.5", 12345); //нужно менять хост при переподключении к другому интернету
+                 //команда, чтобы узнать хост - ifconfig
+                 BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+
+                String time;
+                while ((time = input.readLine()) != null) {
+                    String finalTime = time;
+                    runOnUiThread(() -> timeTextView.setText("Время: " + finalTime));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

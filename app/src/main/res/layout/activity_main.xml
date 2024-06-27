@@ -50,4 +50,14 @@
         style="@style/MyButtonStyle"
         android:layout_below="@id/my_button2" />
 
+    <TextView
+        android:id="@+id/timeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/seekBar"
+        android:layout_marginTop="-258dp"
+        android:text="Time: "
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
+
 </RelativeLayout>
